@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="65dp">
+
+    <intership.dev.contact.view.CircleImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="@dimen/imageview.avatar.layout_hight"
+        android:layout_height="@dimen/imageview.avatar.layout_width"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/imageview.back.margin_left"
+        android:src="@drawable/ic_avt1" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/textview.name.margin_left"
+        android:layout_toRightOf="@+id/imgAvatar"
+        android:textSize="@dimen/textview.titel.contact" />
+
+    <ImageView
+        android:id="@+id/imgDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="11dp"
+        android:src="@drawable/ic_delete" />
+    <ImageView
+        android:id="@+id/imgEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/imgDelete"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="@dimen/imageview.Edit.layout_marginRight"
+        android:src="@drawable/ic_edit" />
+</RelativeLayout>
