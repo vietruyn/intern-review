@@ -5,4 +5,15 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!--Stype dialog theme-->
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/dialog.background</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:button">@color/dialog.background</item>
+        <item name="android:buttonStyle">@android:color/transparent</item>
+    </style>
 </resources>
