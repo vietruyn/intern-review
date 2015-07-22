@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import intership.dev.contact.EditContactActivity;
 import intership.dev.contact.R;
 import intership.dev.contact.model.Contact;
 
@@ -24,12 +25,13 @@ import intership.dev.contact.model.Contact;
  */
 public class ContactAdapter extends ArrayAdapter<Contact> {
 
-    Context context;
 
-    public ContactAdapter(Context context, int resourceId,
+    Activity mActivity;
+
+    public ContactAdapter(Activity mActivity, int resourceId,
                           List<Contact> items) {
-        super(context, resourceId, items);
-        this.context = context;
+        super(mActivity, resourceId, items);
+        this.mActivity = mActivity;
     }
 
     /*private view holder class*/
@@ -44,7 +46,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         ViewHolder holder = null;
         final Contact contact = getItem(position);
 
-        LayoutInflater mInflater = (LayoutInflater) context
+        LayoutInflater mInflater = (LayoutInflater) mActivity
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
@@ -131,6 +133,10 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
                     public void onClick(View v) {
                         dialog.hide();
                         finalHolder.imgEdit.setBackgroundResource(R.drawable.ic_edit);
+                        Intent intent = new Intent(getContext(), EditContactActivity.class);
+                        intent.putExtra("contact",contact);
+                        intent.putExtra("position", position);
+                        mActivity.startActivityForResult(intent, 1);
                     }
                 });
 

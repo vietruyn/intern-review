@@ -1,6 +1,7 @@
 package intership.dev.contact;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,25 +28,26 @@ public class ListContactActivity extends Activity {
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,};
+
     ContactAdapter mContactAdapter;
     LoadMoreListview lvContact;
-    List<Contact> mContact;
+    private ArrayList<Contact> mContacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_contacts);
 
-        mContact = new ArrayList<Contact>();
+        mContacts = new ArrayList<Contact>();
 
         for (int i = 0; i < NAME.length; i++) {
             Contact item = new Contact(AVATAR[i], NAME[i], DESC[i]);
-            mContact.add(item);
+            mContacts.add(item);
         }
 
         lvContact = (LoadMoreListview) findViewById(R.id.lvContact);
         mContactAdapter = new ContactAdapter(this,
-                R.layout.item_list_contact, mContact);
+                R.layout.item_list_contact, mContacts);
         lvContact.setAdapter(mContactAdapter);
         lvContact.setOnLoadMoreListener(new LoadMoreListview.OnLoadMoreListener() {
             @Override
@@ -74,7 +76,7 @@ public class ListContactActivity extends Activity {
 
             for (int i = 0; i < NAME.length; i++) {
                 Contact item = new Contact(AVATAR[i], NAME[i], DESC[i]);
-                mContact.add(item);
+                mContacts.add(item);
             }
 
             return null;
@@ -99,6 +101,16 @@ public class ListContactActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1&&resultCode==RESULT_OK){
+            Contact contact=(Contact) data.getSerializableExtra("contact");
+            int position=data.getIntExtra("position",-1);
+            mContacts.set(position,contact);
+            mContactAdapter.notifyDataSetChanged();
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
