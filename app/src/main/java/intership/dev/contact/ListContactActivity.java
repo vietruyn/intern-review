@@ -1,6 +1,7 @@
 package intership.dev.contact;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,22 +12,23 @@ import java.util.List;
 
 import intership.dev.contact.adapter.ContactAdapter;
 import intership.dev.contact.model.Contact;
+import intership.dev.contact.view.LoadMoreListview;
 
 
 public class ListContactActivity extends Activity {
 
     public static final String[] NAME = new String[]{"Strawberry",
-            "Banana", "Orange", "Mixed", "Abbott", "Abraham", "Alvin", "Dalton", "Gale", "Halsey", "Isaac", "Philbert"};
+            "Banana", "Orange", "Mixed", "Abbott", "Abraham", "Alvin", "Dalton", "Gale", "Halsey", "Isaac", "Philbert", "Abbott"};
 
     public static final String[] DESC = new String[]{
-            "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m"};
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n"};
 
     public static final Integer[] AVATAR = {R.drawable.ic_avt1,
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,
-            R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4};
-
-    ListView lvContact;
+            R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,};
+    ContactAdapter mContactAdapter;
+    LoadMoreListview lvContact;
     List<Contact> mContact;
 
     @Override
@@ -41,11 +43,60 @@ public class ListContactActivity extends Activity {
             mContact.add(item);
         }
 
-        lvContact = (ListView) findViewById(R.id.lvContact);
-        ContactAdapter adapter = new ContactAdapter(this,
+        lvContact = (LoadMoreListview) findViewById(R.id.lvContact);
+        mContactAdapter = new ContactAdapter(this,
                 R.layout.item_list_contact, mContact);
-        lvContact.setAdapter(adapter);
+        lvContact.setAdapter(mContactAdapter);
+        lvContact.setOnLoadMoreListener(new LoadMoreListview.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new LoadDataTask().execute();
+            }
+        });
 
+
+    }
+
+    private class LoadDataTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            if (isCancelled()) {
+                return null;
+            }
+
+            // Simulates a background task
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+
+            for (int i = 0; i < NAME.length; i++) {
+                Contact item = new Contact(AVATAR[i], NAME[i], DESC[i]);
+                mContact.add(item);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            // We need notify the adapter that the data have been changed
+            mContactAdapter.notifyDataSetChanged();
+
+            // Call onLoadMoreComplete when the LoadMore task, has finished
+            ((LoadMoreListview) lvContact).onLoadMoreComplete();
+
+            super.onPostExecute(result);
+        }
+
+        @Override
+        protected void onCancelled() {
+            // Notify the loading more operation has finished
+            ((LoadMoreListview) lvContact).onLoadMoreComplete();
+        }
     }
 
     @Override

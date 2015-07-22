@@ -11,8 +11,14 @@
     <color name="button.dialog.background">#00ffffff</color>
     <color name="button.background">#00ffffff</color>
     <color name="shape.stroke.button.dialog">#3A000000</color>
-    <!--Color edit contact-->
 
+    <!--Color edit contact-->
     <color name="button.save.background">#FF595CFA</color>
     <color name="view.fragment_edit_contact">#1A000000</color>
+
+    <!--Custom load more listview-->
+    <color name="gradient_endColor">#2F4F4F</color>
+    <color name="gradient_startColor">#AFAFAF</color>
+    <color name="gradient_centerColor">#C0C0C0</color>
+
 </resources>

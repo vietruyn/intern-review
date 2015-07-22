@@ -28,12 +28,12 @@
 
     </RelativeLayout>
 
-    <ListView
+    <intership.dev.contact.view.LoadMoreListview
         android:id="@+id/lvContact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rlActibar">
 
-    </ListView>
+    </intership.dev.contact.view.LoadMoreListview>
 
 </RelativeLayout>

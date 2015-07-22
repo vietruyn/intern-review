@@ -23,6 +23,11 @@
     <dimen name="edittext.usename.paddingLeft">20dp</dimen>
     <dimen name="linnerlayout.button.hight">42dp</dimen>
 
+    <dimen name="progressbar.padding">3dp</dimen>
+    <dimen name="progressbar.width">36dp</dimen>
+    <dimen name="progressbar.height">36dp</dimen>
+
+
     <dimen name="textview.titel.contact">15sp</dimen>
 
 </resources>
