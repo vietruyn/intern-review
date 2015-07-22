@@ -13,18 +13,18 @@ import intership.dev.contact.adapter.ContactAdapter;
 import intership.dev.contact.model.Contact;
 
 
-public class MainActivity extends Activity {
+public class ListContactActivity extends Activity {
 
     public static final String[] NAME = new String[]{"Strawberry",
-            "Banana", "Orange", "Mixed", "Abbott", "Abraham", "Alvin", "Dalton", "Gale", "Halsey", "Isaac","Philbert"};
+            "Banana", "Orange", "Mixed", "Abbott", "Abraham", "Alvin", "Dalton", "Gale", "Halsey", "Isaac", "Philbert"};
 
     public static final String[] DESC = new String[]{
-            "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l","m"};
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m"};
 
     public static final Integer[] AVATAR = {R.drawable.ic_avt1,
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,
-            R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4,R.drawable.ic_avt1,
-            R.drawable.ic_avt2, R.drawable.ic_avt3,R.drawable.ic_avt4};
+            R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,
+            R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4};
 
     ListView lvContact;
     List<Contact> mContact;
@@ -32,12 +32,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_contacts);
 
         mContact = new ArrayList<Contact>();
-        /**
-         *
-         */
+
         for (int i = 0; i < NAME.length; i++) {
             Contact item = new Contact(AVATAR[i], NAME[i], DESC[i]);
             mContact.add(item);

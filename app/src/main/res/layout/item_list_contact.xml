@@ -29,12 +29,13 @@
         android:layout_centerInParent="true"
         android:layout_marginRight="11dp"
         android:src="@drawable/ic_delete" />
+
     <ImageView
         android:id="@+id/imgEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/imgDelete"
         android:layout_centerInParent="true"
         android:layout_marginRight="@dimen/imageview.Edit.layout_marginRight"
+        android:layout_toLeftOf="@+id/imgDelete"
         android:src="@drawable/ic_edit" />
 </RelativeLayout>

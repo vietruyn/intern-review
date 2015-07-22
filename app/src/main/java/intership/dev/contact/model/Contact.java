@@ -14,7 +14,7 @@ public class Contact {
         this.mDescContact = mDescContact;
     }
 
-    public  int getmAvatar() {
+    public int getmAvatar() {
         return mAvatar;
     }
 

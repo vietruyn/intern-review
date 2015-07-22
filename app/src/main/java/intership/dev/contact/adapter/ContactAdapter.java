@@ -1,15 +1,16 @@
 package intership.dev.contact.adapter;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,7 +53,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
             holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
             holder.imgAvatar = (ImageView) convertView.findViewById(R.id.imgAvatar);
             holder.imgDelete = (ImageView) convertView.findViewById(R.id.imgDelete);
-            holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgDelete);
+            holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
             convertView.setTag(holder);
         } else
             holder = (ViewHolder) convertView.getTag();
@@ -61,30 +62,91 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         holder.imgAvatar.setImageResource(contact.getmAvatar());
         String mDesc = contact.getmDescContact();
 
+        /**
+         * Show dialog when click icon delete
+         */
+        final ViewHolder finalHolder = holder;
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final Dialog dialog = new Dialog(getContext(), R.style.Theme_Dialog);
+                // Include dialog.xml file
+                dialog.setContentView(R.layout.dialog_list_contact);
 
-                builder.setMessage(Html.fromHtml("Are you sure you want to delete " + "<b>"+contact.getmNameContact().toString()+"</b>"+ "?"))
-                        .setCancelable(false)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                remove(contact);
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                // Set values for custom dialog components - text
+                TextView tvMessenger = (TextView) dialog.findViewById(R.id.tvMessenger);
+                tvMessenger.setText(Html.fromHtml("Are you sure you want to delete " + "<b>" + contact.getmNameContact().toString() + "</b>" + "?"));
+                dialog.show();
 
+                //Set backround icon delete;
+                finalHolder.imgDelete.setBackgroundResource(R.drawable.ic_delete_check);
 
-                builder.create().show();
+                //Set event when click ok in dialog
+                Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        remove(contact);
+                        dialog.hide();
+                        finalHolder.imgDelete.setBackgroundResource(R.drawable.ic_delete);
+                    }
+                });
+
+                //Set event when click ok in dialog
+                Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.hide();
+                        finalHolder.imgDelete.setBackgroundResource(R.drawable.ic_delete);
+                    }
+                });
             }
         });
+        /**
+         * Show dialog when click icon edit
+         */
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                final Dialog dialog = new Dialog(getContext(), R.style.Theme_Dialog);
+                // Include dialog.xml file
+                dialog.setContentView(R.layout.dialog_list_contact);
+
+                //Set backround icon delete;
+                finalHolder.imgEdit.setBackgroundResource(R.drawable.ic_edit_check);
+
+                // set values for custom dialog components - text
+                TextView tvMessenger = (TextView) dialog.findViewById(R.id.tvMessenger);
+                tvMessenger.setText(Html.fromHtml("Are you sure you want to edit " + "<b>" + contact.getmNameContact().toString() + "</b>" + "?"));
+                dialog.show();
+
+                //Set event when click ok in dialog
+                Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.hide();
+                        finalHolder.imgEdit.setBackgroundResource(R.drawable.ic_edit);
+                    }
+                });
+
+                //Set event when click ok in dialog
+                Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.hide();
+                        finalHolder.imgEdit.setBackgroundResource(R.drawable.ic_edit);
+                    }
+                });
+
+            }
+        });
+
         return convertView;
     }
 }
