@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--List contact-->
     <color name="background.title.contact">#00bbd2</color>
     <color name="textview.title.contact">#ffffff</color>
+
+
+    <!--Dialog-->
     <color name="dialog.background">#ccffffff</color>
     <color name="button.dialog.background">#00ffffff</color>
     <color name="button.background">#00ffffff</color>
     <color name="shape.stroke.button.dialog">#3A000000</color>
+    <!--Color edit contact-->
+
+    <color name="button.save.background">#FF595CFA</color>
+    <color name="view.fragment_edit_contact">#1A000000</color>
 </resources>

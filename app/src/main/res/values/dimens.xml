@@ -16,6 +16,13 @@
     <dimen name="dialog.listcontact.hight">140dp</dimen>
     <dimen name="linnerlayout.button.dialog.hight">40dp</dimen>
 
+    <!--Set value size, magin...dialog in edit contact-->
+    <dimen name="imageview.avatar.size">96dp</dimen>
+    <dimen name="textview.name.editcontact.margin_left">28dp</dimen>
+    <dimen name="relativeLayout.username.hight">48dp</dimen>
+    <dimen name="edittext.usename.paddingLeft">20dp</dimen>
+    <dimen name="linnerlayout.button.hight">42dp</dimen>
+
     <dimen name="textview.titel.contact">15sp</dimen>
 
 </resources>
