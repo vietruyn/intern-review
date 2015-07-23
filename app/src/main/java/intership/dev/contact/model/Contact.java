@@ -10,6 +10,12 @@ public class Contact implements Serializable{
     private String mNameContact;
     private String mDescContact;
 
+    /**
+     * Create a new user with information
+     * @param mAvatar      The avatar of a user
+     * @param mNameContact    The fullname of a user
+     * @param mDescContact Some information of a user
+     */
     public Contact(int mAvatar, String mNameContact, String mDescContact) {
         this.mAvatar = mAvatar;
         this.mNameContact = mNameContact;

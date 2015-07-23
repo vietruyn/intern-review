@@ -31,9 +31,9 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
     private Button btnSave, btnCancel;
     private ImageView imgBack;
 
-    Intent mIntent;
-    Contact mContact;
-    int mPosition;
+    private Intent mIntent;
+    private Contact mContact;
+    private int mPosition;
 
     @Nullable
     @Override

@@ -26,7 +26,7 @@ import intership.dev.contact.model.Contact;
 public class ContactAdapter extends ArrayAdapter<Contact> {
 
 
-    Activity mActivity;
+    private Activity mActivity;
 
     public ContactAdapter(Activity mActivity, int resourceId,
                           List<Contact> items) {

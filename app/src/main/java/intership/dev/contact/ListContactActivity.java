@@ -18,19 +18,19 @@ import intership.dev.contact.view.LoadMoreListview;
 
 public class ListContactActivity extends Activity {
 
-    public static final String[] NAME = new String[]{"Strawberry",
+    private static final String[] NAME = new String[]{"Strawberry",
             "Banana", "Orange", "Mixed", "Abbott", "Abraham", "Alvin", "Dalton", "Gale", "Halsey", "Isaac", "Philbert", "Abbott"};
 
-    public static final String[] DESC = new String[]{
+    private static final String[] DESC = new String[]{
             "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n"};
 
-    public static final Integer[] AVATAR = {R.drawable.ic_avt1,
+    private static final Integer[] AVATAR = {R.drawable.ic_avt1,
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,
             R.drawable.ic_avt2, R.drawable.ic_avt3, R.drawable.ic_avt4, R.drawable.ic_avt1,};
 
-    ContactAdapter mContactAdapter;
-    LoadMoreListview lvContact;
+    private ContactAdapter mContactAdapter;
+    private LoadMoreListview lvContact;
     private ArrayList<Contact> mContacts;
 
     @Override
