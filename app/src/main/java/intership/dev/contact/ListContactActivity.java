@@ -69,11 +69,11 @@ public class ListContactActivity extends Activity {
             if (isCancelled()) {
                 return null;
             }
-
             // Simulates a background task
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
             for (int i = 0; i < NAME.length; i++) {

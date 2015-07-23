@@ -12,9 +12,10 @@
     <color name="button.background">#00ffffff</color>
     <color name="shape.stroke.button.dialog">#3A000000</color>
 
-    <!--Color edit contact-->
+    <!--Color edit contact fragment-->
     <color name="button.save.background">#FF595CFA</color>
     <color name="view.fragment_edit_contact">#1A000000</color>
+    <color name="relativeLayout_background">#1A000000</color>
 
     <!--Custom load more listview-->
     <color name="gradient_endColor">#2F4F4F</color>

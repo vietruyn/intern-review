@@ -50,7 +50,7 @@
             android:textColor="@android:color/black"
             android:layout_marginLeft="@dimen/textview.name.editcontact.margin_left"
             android:layout_toRightOf="@+id/imgAvatar"
-            android:textSize="@dimen/textview.titel.contact" />
+            android:textSize="@dimen/textview.name.contact" />
 
         <View
             android:layout_width="match_parent"
@@ -62,7 +62,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/relativeLayout.username.hight"
         android:id="@+id/rlName"
-        android:layout_below="@+id/rlUser">
+        android:layout_below="@+id/rlUser"
+        android:background="@color/relativeLayout_background">
         <EditText
             android:id="@+id/edtName"
             android:layout_width="match_parent"
@@ -82,7 +83,8 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@id/rlName"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:background="@color/relativeLayout_background">
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

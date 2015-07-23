@@ -33,7 +33,7 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
 
     Intent mIntent;
     Contact mContact;
-    int position;
+    int mPosition;
 
     @Nullable
     @Override
@@ -43,15 +43,10 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
         mIntent = getActivity().getIntent();
         Bundle bundle = mIntent.getExtras();
         mContact = (Contact) bundle.getSerializable("contact");
+        mPosition = bundle.getInt("position");
 
         init(view);
-
-        edtName.setText(mContact.getmNameContact().toString());
-        edtDesc.setText(mContact.getmDescContact().toString());
-        imgAvatar.setBackgroundResource(mContact.getmAvatar());
-        tvName.setText(mContact.getmNameContact().toString());
-        position = bundle.getInt("position");
-
+        setValue();
 
         /**
          * Event click button save
@@ -63,8 +58,15 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
          */
         btnCancel.setOnClickListener(this);
 
+        /**
+         * Event when click back
+         */
+        imgBack.setOnClickListener(this);
+
         return view;
     }
+
+
 
     /**
      * @param view
@@ -79,11 +81,27 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
         imgBack = (ImageView) view.findViewById(R.id.imgBack);
     }
 
+    /**
+     * Set value name, desciption and avatar
+     */
+    private void setValue() {
+        edtName.setText(mContact.getmNameContact().toString());
+        edtDesc.setText(mContact.getmDescContact().toString());
+        imgAvatar.setBackgroundResource(mContact.getmAvatar());
+        tvName.setText(mContact.getmNameContact().toString());
 
+    }
+
+    /**
+     * Event buttons
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
+            //Save
             case R.id.btnSave:
                 final Dialog dialog = new Dialog(getActivity(), R.style.Theme_Dialog);
 
@@ -102,7 +120,7 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
                     public void onClick(View v) {
                         mContact.setmNameContact(edtName.getText().toString());
                         mContact.setmDescContact(edtDesc.getText().toString());
-                        mIntent.putExtra("position", position);
+                        mIntent.putExtra("position", mPosition);
                         mIntent.putExtra("contact", mContact);
                         getActivity().setResult(Activity.RESULT_OK, mIntent);
                         dialog.hide();
@@ -119,9 +137,14 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
                 });
                 break;
 
+            //Cancel
             case R.id.btnCancel:
                 getActivity().finish();
                 break;
+
+            //Back
+            case R.id.imgBack:
+                getActivity().finish();
             default:
         }
     }
