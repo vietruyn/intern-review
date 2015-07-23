@@ -24,7 +24,7 @@
             android:layout_centerInParent="true"
             android:text="@string/textview.title.list_contact"
             android:textColor="@color/textview.title.contact"
-            android:textSize="@dimen/textview.titel.contact" />
+            android:textSize="@dimen/textview.title.contact" />
 
     </RelativeLayout>
 

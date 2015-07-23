@@ -7,13 +7,13 @@
 
 
     <!--Dialog-->
-    <color name="dialog.background">#ccffffff</color>
+    <color name="dialog.background">#c4e5e5e5</color>
     <color name="button.dialog.background">#00ffffff</color>
     <color name="button.background">#00ffffff</color>
-    <color name="shape.stroke.button.dialog">#3A000000</color>
+    <color name="shape.stroke.button.dialog">#1A000000</color>
 
     <!--Color edit contact fragment-->
-    <color name="button.save.background">#FF595CFA</color>
+    <color name="textview.button.save.background">#51A9FF</color>
     <color name="view.fragment_edit_contact">#1A000000</color>
     <color name="relativeLayout_background">#1A000000</color>
 
