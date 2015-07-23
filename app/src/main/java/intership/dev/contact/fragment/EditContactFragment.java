@@ -53,6 +53,16 @@ public class EditContactFragment extends Fragment {
         final int position = bundle.getInt("position");
 
         /**
+         * Event click back
+         */
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+
+        /**
          * Event click button save
          */
         btnSave.setOnClickListener(new View.OnClickListener() {
