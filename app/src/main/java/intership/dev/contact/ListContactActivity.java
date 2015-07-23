@@ -39,15 +39,14 @@ public class ListContactActivity extends Activity {
         setContentView(R.layout.activity_list_contacts);
 
         mContacts = new ArrayList<Contact>();
-
         for (int i = 0; i < NAME.length; i++) {
             Contact item = new Contact(AVATAR[i], NAME[i], DESC[i]);
             mContacts.add(item);
         }
 
+        //Set data for listview
         lvContact = (LoadMoreListview) findViewById(R.id.lvContact);
-        mContactAdapter = new ContactAdapter(this,
-                R.layout.item_list_contact, mContacts);
+        mContactAdapter = new ContactAdapter(this, R.layout.item_list_contact, mContacts);
         lvContact.setAdapter(mContactAdapter);
         lvContact.setOnLoadMoreListener(new LoadMoreListview.OnLoadMoreListener() {
             @Override
@@ -59,6 +58,9 @@ public class ListContactActivity extends Activity {
 
     }
 
+    /**
+     *Asyntact load more list
+     */
     private class LoadDataTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -101,16 +103,23 @@ public class ListContactActivity extends Activity {
         }
     }
 
+    /**
+     *Get item contact from Edit contact
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1&&resultCode==RESULT_OK){
-            Contact contact=(Contact) data.getSerializableExtra("contact");
-            int position=data.getIntExtra("position",-1);
-            mContacts.set(position,contact);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Contact contact = (Contact) data.getSerializableExtra("contact");
+            int position = data.getIntExtra("position", -1);
+            mContacts.set(position, contact);
             mContactAdapter.notifyDataSetChanged();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

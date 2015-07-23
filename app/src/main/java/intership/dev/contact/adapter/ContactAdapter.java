@@ -113,43 +113,10 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
             @Override
             public void onClick(View v) {
 
-
-                final Dialog dialog = new Dialog(getContext(), R.style.Theme_Dialog);
-                // Include dialog.xml file
-                dialog.setContentView(R.layout.dialog_list_contact);
-
-                //Set backround icon delete;
-                finalHolder.imgEdit.setBackgroundResource(R.drawable.ic_edit_check);
-
-                // set values for custom dialog components - text
-                TextView tvMessenger = (TextView) dialog.findViewById(R.id.tvMessenger);
-                tvMessenger.setText(Html.fromHtml("Are you sure you want to edit " + "<b>" + contact.getmNameContact().toString() + "</b>" + "?"));
-                dialog.show();
-
-                //Set event when click ok in dialog
-                Button btnOk = (Button) dialog.findViewById(R.id.btnOk);
-                btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.hide();
-                        finalHolder.imgEdit.setBackgroundResource(R.drawable.ic_edit);
-                        Intent intent = new Intent(getContext(), EditContactActivity.class);
-                        intent.putExtra("contact",contact);
-                        intent.putExtra("position", position);
-                        mActivity.startActivityForResult(intent, 1);
-                    }
-                });
-
-                //Set event when click ok in dialog
-                Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
-                btnCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.hide();
-                        finalHolder.imgEdit.setBackgroundResource(R.drawable.ic_edit);
-                    }
-                });
-
+                Intent intent = new Intent(getContext(), EditContactActivity.class);
+                intent.putExtra("contact", contact);
+                intent.putExtra("position", position);
+                mActivity.startActivityForResult(intent, 1);
             }
         });
 
