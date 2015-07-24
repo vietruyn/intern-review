@@ -9,15 +9,6 @@
         android:layout_height="@dimen/title.contact.size"
         android:background="@drawable/shape_title_contact">
 
-        <ImageView
-            android:id="@+id/imgBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/imageview.back.margin_left"
-            android:src="@drawable/ic_back" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,9 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@android:color/black"
             android:layout_marginLeft="@dimen/textview.name.editcontact.margin_left"
             android:layout_toRightOf="@+id/imgAvatar"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/textview.name.contact" />
 
         <View
@@ -58,25 +49,27 @@
             android:layout_alignParentBottom="true"
             android:background="@color/view.fragment_edit_contact" />
     </RelativeLayout>
+
     <RelativeLayout
+        android:id="@+id/rlName"
         android:layout_width="match_parent"
         android:layout_height="@dimen/relativeLayout.username.hight"
-        android:id="@+id/rlName"
         android:layout_below="@+id/rlUser"
         android:background="@color/relativeLayout_background">
+
         <EditText
             android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:paddingLeft="@dimen/imageview.avarta.contact.margin_left"/>
+            android:paddingLeft="@dimen/imageview.avarta.contact.margin_left" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
             android:background="@color/view.fragment_edit_contact" />
     </RelativeLayout>
-
 
 
     <RelativeLayout
@@ -85,19 +78,22 @@
         android:layout_below="@id/rlName"
         android:layout_marginTop="40dp"
         android:background="@color/relativeLayout_background">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentTop="true"
             android:background="@color/view.fragment_edit_contact" />
+
         <EditText
             android:id="@+id/edtDesc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
             android:layout_margin="@dimen/imageview.avarta.contact.margin_left"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -106,29 +102,31 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/lnButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/linnerlayout.button.hight"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:id="@+id/lnButton">
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/shape_background_button_dialog"
             android:text="Save"
             android:textAllCaps="false"
-            android:textColor="@color/textview.button.save.background"
-            android:layout_weight="1"/>
+            android:textColor="@color/textview.button.save.background" />
+
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/shape_background_button_dialog"
             android:text="Cancel"
             android:textAllCaps="false"
-            android:textColor="@color/textview.button.save.background"
-            android:layout_weight="1"/>
+            android:textColor="@color/textview.button.save.background" />
 
     </LinearLayout>
 </RelativeLayout>

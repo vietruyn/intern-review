@@ -30,13 +30,10 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
     private TextView tvName;
     private EditText edtName, edtDesc;
     private Button btnSave, btnCancel;
-    private ImageView imgBack;
-
-    private Intent mIntent;
     private Contact mContact;
-    private int mPosition;
 
     private OnChangeItemListener mListenerOnChange;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,14 +55,8 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
          */
         btnCancel.setOnClickListener(this);
 
-        /**
-         * Event when click back
-         */
-        imgBack.setOnClickListener(this);
-
         return view;
     }
-
 
 
     /**
@@ -78,7 +69,6 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
         btnSave = (Button) view.findViewById(R.id.btnSave);
         btnCancel = (Button) view.findViewById(R.id.btnCancel);
         tvName = (TextView) view.findViewById(R.id.tvName);
-        imgBack = (ImageView) view.findViewById(R.id.imgBack);
     }
 
     /**
@@ -120,13 +110,12 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
                     public void onClick(View v) {
                         mContact.setmNameContact(edtName.getText().toString());
                         mContact.setmDescContact(edtDesc.getText().toString());
-                        Log.e(edtName.getText().toString(),edtDesc.getText().toString());
                         mListenerOnChange.onChange(mContact);
                         getActivity().onBackPressed();
                         dialog.hide();
-
                     }
                 });
+
                 //Set event when click ok in dialog
                 Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
                 btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -142,13 +131,13 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
                 getActivity().onBackPressed();
                 break;
 
-            //Back
-            case R.id.imgBack:
-                getActivity().finish();
             default:
         }
     }
 
+    /**
+     * @param listener
+     */
     public void setOnChangeItemListener(OnChangeItemListener listener) {
         mListenerOnChange = listener;
     }

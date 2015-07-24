@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ import intership.dev.contact.model.Contact;
 import intership.dev.contact.view.LoadMoreListview;
 
 
-public class ListContactFragment extends Fragment {
+public class ListContactFragment extends Fragment implements View.OnClickListener {
 
     private static final String[] NAME = new String[]{"Strawberry",
             "Banana", "Orange", "Mixed", "Abbott", "Abraham", "Alvin", "Dalton", "Gale", "Halsey", "Isaac", "Philbert", "Abbott"};
@@ -32,11 +33,37 @@ public class ListContactFragment extends Fragment {
     private LoadMoreListview lvContact;
     private ArrayList<Contact> mContacts;
 
+    private ImageView imgBack;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_contacts, null);
         lvContact = (LoadMoreListview) view.findViewById(R.id.lvContact);
+        imgBack =(ImageView) view.findViewById(R.id.imgBack);
+
+        imgBack.setOnClickListener(this);
         return view;
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setValue();
+    }
+
+    @Override
+    public void onResume() {
+        //Set data for listview
+        mContactAdapter = new ContactAdapter(getActivity(), R.layout.item_list_contact, mContacts);
+        lvContact.setAdapter(mContactAdapter);
+        lvContact.setOnLoadMoreListener(new LoadMoreListview.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new LoadDataTask().execute();
+            }
+        });
+        super.onResume();
     }
 
     /**
@@ -48,8 +75,14 @@ public class ListContactFragment extends Fragment {
             Contact item = new Contact(AVATAR[i], NAME[i], DESC[i]);
             mContacts.add(item);
         }
+    }
 
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imgBack:
+                getActivity().finish();
+        }
     }
 
     /**
@@ -95,26 +128,6 @@ public class ListContactFragment extends Fragment {
         }
     }
 
-
-    @Override
-    public void onResume() {
-        //Set data for listview
-        mContactAdapter = new ContactAdapter(getActivity(), R.layout.item_list_contact, mContacts);
-        lvContact.setAdapter(mContactAdapter);
-        lvContact.setOnLoadMoreListener(new LoadMoreListview.OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                new LoadDataTask().execute();
-            }
-        });
-        super.onResume();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setValue();
-    }
 }
 
 
