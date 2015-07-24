@@ -1,20 +1,21 @@
-package intership.dev.contact;
+package intership.dev.contact.fragment;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import intership.dev.contact.R;
 import intership.dev.contact.adapter.ContactAdapter;
 import intership.dev.contact.model.Contact;
 import intership.dev.contact.view.LoadMoreListview;
 
 
-public class ListContactActivity extends Activity {
+public class ListContactFragment extends Fragment {
 
     private static final String[] NAME = new String[]{"Strawberry",
             "Banana", "Orange", "Mixed", "Abbott", "Abraham", "Alvin", "Dalton", "Gale", "Halsey", "Isaac", "Philbert", "Abbott"};
@@ -32,9 +33,8 @@ public class ListContactActivity extends Activity {
     private ArrayList<Contact> mContacts;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_list_contacts);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_list_contacts, null);
 
         mContacts = new ArrayList<Contact>();
         for (int i = 0; i < NAME.length; i++) {
@@ -43,8 +43,8 @@ public class ListContactActivity extends Activity {
         }
 
         //Set data for listview
-        lvContact = (LoadMoreListview) findViewById(R.id.lvContact);
-        mContactAdapter = new ContactAdapter(this, R.layout.item_list_contact, mContacts);
+        lvContact = (LoadMoreListview) view.findViewById(R.id.lvContact);
+        mContactAdapter = new ContactAdapter(getActivity(), R.layout.item_list_contact, mContacts);
         lvContact.setAdapter(mContactAdapter);
         lvContact.setOnLoadMoreListener(new LoadMoreListview.OnLoadMoreListener() {
             @Override
@@ -53,11 +53,11 @@ public class ListContactActivity extends Activity {
             }
         });
 
-
+        return view;
     }
 
     /**
-     *Asyntact load more list
+     * Asyntact load more list
      */
     private class LoadDataTask extends AsyncTask<Void, Void, Void> {
 
@@ -107,36 +107,16 @@ public class ListContactActivity extends Activity {
      * @param resultCode
      * @param data
      */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            Contact contact = (Contact) data.getSerializableExtra("contact");
-            int position = data.getIntExtra("position", -1);
-            mContacts.set(position, contact);
-            mContactAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1 && resultCode == RESULT_OK) {
+//            Contact contact = (Contact) data.getSerializableExtra("contact");
+//            int position = data.getIntExtra("position", -1);
+//            mContacts.set(position, contact);
+//            mContactAdapter.notifyDataSetChanged();
+//        }
 }
+
+
+
