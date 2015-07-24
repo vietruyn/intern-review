@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +110,7 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
 
                 // set values for custom dialog components - text
                 TextView tvMessenger = (TextView) dialog.findViewById(R.id.tvMessenger);
-                tvMessenger.setText(Html.fromHtml("Are you sure you want to edit this contact?"));
+                tvMessenger.setText("Are you sure you want to edit this contact?");
                 dialog.show();
 
                 //Set event when click ok in dialog
@@ -119,11 +120,11 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
                     public void onClick(View v) {
                         mContact.setmNameContact(edtName.getText().toString());
                         mContact.setmDescContact(edtDesc.getText().toString());
-                        mIntent.putExtra("position", mPosition);
-                        mIntent.putExtra("contact", mContact);
-                        getActivity().setResult(Activity.RESULT_OK, mIntent);
+                        Log.e(edtName.getText().toString(),edtDesc.getText().toString());
+                        mListenerOnChange.onChange(mContact);
+                        getActivity().onBackPressed();
                         dialog.hide();
-                        getActivity().finish();
+
                     }
                 });
                 //Set event when click ok in dialog
@@ -138,7 +139,7 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
 
             //Cancel
             case R.id.btnCancel:
-                getActivity().finish();
+                getActivity().onBackPressed();
                 break;
 
             //Back

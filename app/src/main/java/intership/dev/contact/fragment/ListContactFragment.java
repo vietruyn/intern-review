@@ -35,25 +35,21 @@ public class ListContactFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_contacts, null);
+        lvContact = (LoadMoreListview) view.findViewById(R.id.lvContact);
+        return view;
+    }
 
+    /**
+     * Set value Contact
+     */
+    private void setValue() {
         mContacts = new ArrayList<Contact>();
         for (int i = 0; i < NAME.length; i++) {
             Contact item = new Contact(AVATAR[i], NAME[i], DESC[i]);
             mContacts.add(item);
         }
 
-        //Set data for listview
-        lvContact = (LoadMoreListview) view.findViewById(R.id.lvContact);
-        mContactAdapter = new ContactAdapter(getActivity(), R.layout.item_list_contact, mContacts);
-        lvContact.setAdapter(mContactAdapter);
-        lvContact.setOnLoadMoreListener(new LoadMoreListview.OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                new LoadDataTask().execute();
-            }
-        });
 
-        return view;
     }
 
     /**
@@ -85,10 +81,7 @@ public class ListContactFragment extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
 
-            // We need notify the adapter that the data have been changed
             mContactAdapter.notifyDataSetChanged();
-
-            // Call onLoadMoreComplete when the LoadMore task, has finished
             ((LoadMoreListview) lvContact).onLoadMoreComplete();
 
             super.onPostExecute(result);
@@ -96,26 +89,32 @@ public class ListContactFragment extends Fragment {
 
         @Override
         protected void onCancelled() {
+
             // Notify the loading more operation has finished
             ((LoadMoreListview) lvContact).onLoadMoreComplete();
         }
     }
 
-    /**
-     *Get item contact from Edit contact
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 1 && resultCode == RESULT_OK) {
-//            Contact contact = (Contact) data.getSerializableExtra("contact");
-//            int position = data.getIntExtra("position", -1);
-//            mContacts.set(position, contact);
-//            mContactAdapter.notifyDataSetChanged();
-//        }
+
+    @Override
+    public void onResume() {
+        //Set data for listview
+        mContactAdapter = new ContactAdapter(getActivity(), R.layout.item_list_contact, mContacts);
+        lvContact.setAdapter(mContactAdapter);
+        lvContact.setOnLoadMoreListener(new LoadMoreListview.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new LoadDataTask().execute();
+            }
+        });
+        super.onResume();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setValue();
+    }
 }
 
 

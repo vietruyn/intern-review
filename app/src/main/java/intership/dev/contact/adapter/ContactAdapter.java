@@ -36,6 +36,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
     private FragmentTransaction mFragmentTransaction;
     private EditContactFragment mEditContactFragment;
 
+
     public ContactAdapter(FragmentActivity mActivity, int resourceId,
                           List<Contact> items) {
         super(mActivity, resourceId, items);
@@ -43,10 +44,6 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
     }
 
 
-    @Override
-    public void onChange(Contact contact) {
-
-    }
 
     /*private view holder class*/
     private class ViewHolder {
@@ -64,7 +61,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_list_contact, null);
+            convertView = mInflater.inflate(R.layout.item_list_contact, parent,false);
             holder = new ViewHolder();
             holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
             holder.imgAvatar = (ImageView) convertView.findViewById(R.id.imgAvatar);
@@ -149,5 +146,12 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
         mFragmentTransaction.replace(R.id.lnFragment, mEditContactFragment);
         mFragmentTransaction.addToBackStack(null);
         mFragmentTransaction.commit();
+    }
+
+
+    @Override
+    public void onChange(Contact contact) {
+
+        notifyDataSetChanged();
     }
 }
