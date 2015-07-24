@@ -2,9 +2,12 @@ package intership.dev.contact.adapter;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,22 +19,33 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import intership.dev.contact.EditContactActivity;
+
 import intership.dev.contact.R;
+import intership.dev.contact.fragment.EditContactFragment;
 import intership.dev.contact.model.Contact;
 
 /**
  * Created by vietruyn on 21/07/2015.
  */
-public class ContactAdapter extends ArrayAdapter<Contact> {
+public class ContactAdapter extends ArrayAdapter<Contact> implements EditContactFragment.OnChangeItemListener {
 
 
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
-    public ContactAdapter(Activity mActivity, int resourceId,
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
+    private EditContactFragment mEditContactFragment;
+
+    public ContactAdapter(FragmentActivity mActivity, int resourceId,
                           List<Contact> items) {
         super(mActivity, resourceId, items);
         this.mActivity = mActivity;
+    }
+
+
+    @Override
+    public void onChange(Contact contact) {
+
     }
 
     /*private view holder class*/
@@ -113,13 +127,27 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getContext(), EditContactActivity.class);
-                intent.putExtra("contact", contact);
-                intent.putExtra("position", position);
-                mActivity.startActivityForResult(intent, 1);
+                callEditContactFragment(contact);
             }
         });
 
         return convertView;
+    }
+
+    private void callEditContactFragment(Contact contact) {
+        mFragmentManager = mActivity.getSupportFragmentManager();
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+        if (mEditContactFragment == null) {
+            mEditContactFragment = new EditContactFragment();
+            mEditContactFragment.setOnChangeItemListener(this);
+        }
+        Bundle dataBundle = new Bundle();
+        dataBundle.putSerializable("dataBundle", contact);
+
+
+        mEditContactFragment.setArguments(dataBundle);
+        mFragmentTransaction.replace(R.id.lnFragment, mEditContactFragment);
+        mFragmentTransaction.addToBackStack(null);
+        mFragmentTransaction.commit();
     }
 }

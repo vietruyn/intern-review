@@ -35,15 +35,14 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
     private Contact mContact;
     private int mPosition;
 
+    private OnChangeItemListener mListenerOnChange;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_contact, null);
 
-        mIntent = getActivity().getIntent();
-        Bundle bundle = mIntent.getExtras();
-        mContact = (Contact) bundle.getSerializable("contact");
-        mPosition = bundle.getInt("position");
+        Bundle dataBundle = this.getArguments();
+        mContact = (Contact) dataBundle.getSerializable("dataBundle");
 
         init(view);
         setValue();
@@ -147,5 +146,13 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
                 getActivity().finish();
             default:
         }
+    }
+
+    public void setOnChangeItemListener(OnChangeItemListener listener) {
+        mListenerOnChange = listener;
+    }
+
+    public interface OnChangeItemListener {
+        void onChange(Contact contact);
     }
 }

@@ -23,7 +23,7 @@ public class MainActivity extends FragmentActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         ListContactFragment fragment = new ListContactFragment();
-        transaction.add(R.id.lnEditFragment, fragment);
+        transaction.add(R.id.lnFragment, fragment);
         transaction.commit();
     }
 }
