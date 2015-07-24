@@ -19,6 +19,7 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/textview.name.margin_left"
         android:layout_toRightOf="@+id/imgAvatar"
+        android:layout_toLeftOf="@+id/imgEdit"
         android:textSize="@dimen/textview.title.contact" />
 
     <ImageView

@@ -63,10 +63,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_list_contact, parent,false);
             holder = new ViewHolder();
-            holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
-            holder.imgAvatar = (ImageView) convertView.findViewById(R.id.imgAvatar);
-            holder.imgDelete = (ImageView) convertView.findViewById(R.id.imgDelete);
-            holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
+            init(convertView, holder);
             convertView.setTag(holder);
         } else
             holder = (ViewHolder) convertView.getTag();
@@ -129,6 +126,19 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
         });
 
         return convertView;
+    }
+
+    /**
+     * initialise
+     * @param convertView
+     * @param holder
+     */
+
+    private void init(View convertView, ViewHolder holder) {
+        holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+        holder.imgAvatar = (ImageView) convertView.findViewById(R.id.imgAvatar);
+        holder.imgDelete = (ImageView) convertView.findViewById(R.id.imgDelete);
+        holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
     }
 
     private void callEditContactFragment(Contact contact) {
