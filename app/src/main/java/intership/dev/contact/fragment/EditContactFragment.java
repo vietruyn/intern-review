@@ -22,6 +22,8 @@ import intership.dev.contact.view.CircleImageView;
 
 /**
  * Created by vietruyn on 22/07/2015.
+ *
+ * Creat edit contact fragment when click edit item on list contact
  */
 
 public class EditContactFragment extends Fragment implements View.OnClickListener {
@@ -60,6 +62,7 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
 
 
     /**
+     * initialise Value
      * @param view
      */
     private void init(View view) {
@@ -91,7 +94,9 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
 
-            //Save
+            /**
+             * Save
+             */
             case R.id.btnSave:
                 final Dialog dialog = new Dialog(getActivity(), R.style.Theme_Dialog);
 
@@ -136,12 +141,18 @@ public class EditContactFragment extends Fragment implements View.OnClickListene
     }
 
     /**
-     * @param listener
+     * Register a callback to be invoked when a changed user was given from
+     * ContactDetailFragment to ContactsFragment
+     *
+     * @param listener The callback will run
      */
     public void setOnChangeItemListener(OnChangeItemListener listener) {
         mListenerOnChange = listener;
     }
 
+    /**
+     * Interface definition for a callback to be invoked when an item in list contacts was changed
+    */
     public interface OnChangeItemListener {
         void onChange(Contact contact);
     }

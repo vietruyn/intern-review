@@ -114,6 +114,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
                 });
             }
         });
+
         /**
          * Show dialog when click icon edit
          */
@@ -133,7 +134,6 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
      * @param convertView
      * @param holder
      */
-
     private void init(View convertView, ViewHolder holder) {
         holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
         holder.imgAvatar = (ImageView) convertView.findViewById(R.id.imgAvatar);
@@ -141,6 +141,10 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
         holder.imgEdit = (ImageView) convertView.findViewById(R.id.imgEdit);
     }
 
+    /**
+     *
+     * @param contact
+     */
     private void callEditContactFragment(Contact contact) {
         mFragmentManager = mActivity.getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -158,7 +162,10 @@ public class ContactAdapter extends ArrayAdapter<Contact> implements EditContact
         mFragmentTransaction.commit();
     }
 
-
+    /**
+     *Update list view when click save from fragment edit contact
+     * @param contact
+     */
     @Override
     public void onChange(Contact contact) {
 

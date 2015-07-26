@@ -7,7 +7,7 @@
 
 
     <!--Dialog-->
-    <color name="dialog.background">#c4e5e5e5</color>
+    <color name="dialog.background">#3A000000</color>
     <color name="button.dialog.background">#00ffffff</color>
     <color name="button.background">#00ffffff</color>
     <color name="shape.stroke.button.dialog">#1A000000</color>

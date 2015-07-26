@@ -9,6 +9,9 @@ import intership.dev.contact.fragment.ListContactFragment;
 
 /**
  * Created by vietruyn on 24/07/2015.
+ *
+ * Main Activity that is launched when application start
+ *
  */
 public class MainActivity extends FragmentActivity {
     @Override
@@ -16,10 +19,13 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addListContactFragment();
+        callListContactFragment();
     }
 
-    private void addListContactFragment() {
+    /**
+     * Call fragment list contact
+     */
+    private void callListContactFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         ListContactFragment fragment = new ListContactFragment();

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by vietruyn on 21/07/2015.
+ *
+ * Created Constructor
  */
 public class Contact implements Serializable{
     private int mAvatar;

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import intership.dev.contact.R;
 import intership.dev.contact.adapter.ContactAdapter;
@@ -31,7 +32,7 @@ public class ListContactFragment extends Fragment implements View.OnClickListene
 
     private ContactAdapter mContactAdapter;
     private LoadMoreListview lvContact;
-    private ArrayList<Contact> mContacts;
+    private List<Contact> mContacts;
 
     private ImageView imgBack;
 
